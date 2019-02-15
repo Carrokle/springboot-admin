@@ -16,14 +16,17 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -78,10 +81,40 @@ public final class HttpUtil {
         return result;
     }
 
+    /**
+     * 使用okhttp进行请求
+     * @param url
+     * @param params
+     * @return
+     */
     public static String post(String url, String params) {
         RequestBody body = RequestBody.create(CONTENT_TYPE_FORM, params);
         Request request = new Request.Builder().url(url).post(body).build();
         return exec(request);
+    }
+
+    /**
+     * 使用okhttp上传文件例子
+     * @param url
+     * @param fileKey
+     * @param fileName
+     * @param file
+     * @param params
+     * @return
+     */
+    public static String post(String url, String fileKey, String fileName, File file, Map<String,String> params){
+        MediaType fileMediaType = MediaType.parse("multipart/form-data");
+        RequestBody body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file",fileName,RequestBody.create(fileMediaType,file))
+                .addFormDataPart("key","value")
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        return exec(request);
+
     }
 
     private static String exec(Request request) {
