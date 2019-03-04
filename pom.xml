@@ -11,7 +11,8 @@
     <modules>
         <module>admin-common</module>
         <module>admin-generator</module>
-        <module>com-core</module>
+        <module>admin-core</module>
+        <module>admin-web</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,7 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
         <mybatisplus.version>2.1.8</mybatisplus.version>
         <fastjson.version>1.2.39</fastjson.version>
         <druid-version>1.1.5</druid-version>
@@ -86,11 +87,38 @@
                 <version>${springfox-swagger2.version}</version>
             </dependency>
             <!-- swagger end -->
+            <!--springboot-redis start-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
+                <!--<groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-redis</artifactId>
-                <version>1.3.5.RELEASE</version>
+                <version>1.3.5.RELEASE</version>-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.1.3.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>redis.clients</groupId>
+                        <artifactId>jedis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.lettuce</groupId>
+                        <artifactId>lettuce-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
+            <!-- 添加jedis客户端 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+            <!--spring2.0集成redis所需common-pool2-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.4.2</version>
+            </dependency>
+            <!--srpingboot-redis end-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
@@ -158,8 +186,8 @@
             <!-- mybatis-plus begin -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatisplus-spring-boot-starter</artifactId>
-                <version>${mybatisplus-spring-boot-starter.version}</version>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
