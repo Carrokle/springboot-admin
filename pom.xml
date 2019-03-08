@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>parent</groupId>
+    <groupId>com.lb</groupId>
     <artifactId>springboot-admin</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -25,12 +25,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
-        <mybatisplus.version>2.1.8</mybatisplus.version>
+        <mybatisplus.version>3.1.0</mybatisplus.version>
         <fastjson.version>1.2.39</fastjson.version>
         <druid-version>1.1.5</druid-version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <reflections.version>0.9.10</reflections.version>
-        <spring-boot-autoconfigure.version>1.5.1.RELEASE</spring-boot-autoconfigure.version>
+        <spring-boot-autoconfigure.version>2.1.3.RELEASE</spring-boot-autoconfigure.version>
         <guava.version>17.0</guava.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <spring-boot-starter-aop.version>1.5.1.RELEASE</spring-boot-starter-aop.version>
@@ -47,10 +47,11 @@
         <rest-assured.version>2.9.0</rest-assured.version>
         <ant.version>1.9.7</ant.version>
         <velocity.version>1.7</velocity.version>
-        <springfox-swagger2.version>2.2.2</springfox-swagger2.version>
+        <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
         <guava.version>18.0</guava.version>
         <lombok.version>1.18.4</lombok.version>
         <okhttp.version>3.4.1</okhttp.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -210,6 +211,14 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
+                <version>2.1.3.RELEASE</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.jayway.restassured</groupId>
@@ -245,10 +254,16 @@
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!--<repositories>
+    <repositories>
         <repository>
             <id>ali-snapshots</id>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
@@ -281,7 +296,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>-->
+    </pluginRepositories>
 
 
 </project>

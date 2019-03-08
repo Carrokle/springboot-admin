@@ -1,11 +1,6 @@
 package com.lb.config;
 
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import java.io.Serializable;
-
-import javax.servlet.http.HttpServletResponse;
 
 import lombok.Data;
 
@@ -22,8 +17,9 @@ public class ResponseModel<T> implements Serializable {
     private String code;
 
     public ResponseModel() {
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        response.setCharacterEncoding("UTF-8");
+       /* HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getResponse();
+        response.setCharacterEncoding("UTF-8");*/
     }
 
     @Override

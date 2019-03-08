@@ -14,28 +14,29 @@ import java.util.Collections;
 
 /**
  * 声明式事物配置
+ *
  * @author liugh
  * @since 2018-05-06
  */
 @Configuration
 public class TransactionalConfig {
-    private static final String   CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME               = "customizeTransactionInterceptor";
+    private static final String CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME = "customizeTransactionInterceptor";
     /**
      * 默认只对 "*Service" , "*ServiceImpl" Bean 进行事务处理,"*"表示模糊匹配, 比如 : userService,orderServiceImpl
      */
-    private static final String[] DEFAULT_TRANSACTION_BEAN_NAMES                       = { "*Service" , "*ServiceImpl" };
+    private static final String[] DEFAULT_TRANSACTION_BEAN_NAMES = {"*Service", "*ServiceImpl"};
     /**
      * 可传播事务配置
      */
-    private static final String[] DEFAULT_REQUIRED_METHOD_RULE_TRANSACTION_ATTRIBUTES  = {
-            "add*" ,
-            "save*" ,
-            "insert*" ,
-            "delete*" ,
-            "update*" ,
-            "edit*" ,
-            "batch*" ,
-            "create*" ,
+    private static final String[] DEFAULT_REQUIRED_METHOD_RULE_TRANSACTION_ATTRIBUTES = {
+            "add*",
+            "save*",
+            "insert*",
+            "delete*",
+            "update*",
+            "edit*",
+            "batch*",
+            "create*",
             "remove*",
             "lock*",
             "record*",
@@ -77,12 +78,12 @@ public class TransactionalConfig {
      * 默认的只读事务
      */
     private static final String[] DEFAULT_READ_ONLY_METHOD_RULE_TRANSACTION_ATTRIBUTES = {
-            "get*" ,
-            "count*" ,
-            "find*" ,
-            "query*" ,
-            "select*" ,
-            "list*" ,
+            "get*",
+            "count*",
+            "find*",
+            "query*",
+            "select*",
+            "list*",
             "search*",
             "is*",
             "verify*",
@@ -93,16 +94,16 @@ public class TransactionalConfig {
     /**
      * 自定义事务 BeanName 拦截
      */
-    private              String[] customizeTransactionBeanNames                        = {};
+    private String[] customizeTransactionBeanNames = {};
     /**
      * 自定义方法名的事务属性相关联,可以使用通配符(*)字符关联相同的事务属性的设置方法; 只读事务
      */
-    private              String[] customizeReadOnlyMethodRuleTransactionAttributes     = {};
+    private String[] customizeReadOnlyMethodRuleTransactionAttributes = {};
     /**
      * 自定义方法名的事务属性相关联,可以使用通配符(*)字符关联相同的事务属性的设置方法;
      * 传播事务(默认的){@link org.springframework.transaction.annotation.Propagation#REQUIRED}
      */
-    private              String[] customizeRequiredMethodRuleTransactionAttributes     = {};
+    private String[] customizeRequiredMethodRuleTransactionAttributes = {};
 
 
     /**
@@ -110,28 +111,28 @@ public class TransactionalConfig {
      *
      * @param transactionManager : 事务管理器
      */
-    @Bean( CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME )
-    public TransactionInterceptor customizeTransactionInterceptor (PlatformTransactionManager transactionManager ) {
+    @Bean(CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME)
+    public TransactionInterceptor customizeTransactionInterceptor(PlatformTransactionManager transactionManager) {
         NameMatchTransactionAttributeSource transactionAttributeSource = new NameMatchTransactionAttributeSource();
-        RuleBasedTransactionAttribute readOnly                   = this.readOnlyTransactionRule();
-        RuleBasedTransactionAttribute required                   = this.requiredTransactionRule();
+        RuleBasedTransactionAttribute readOnly = this.readOnlyTransactionRule();
+        RuleBasedTransactionAttribute required = this.requiredTransactionRule();
         // 默认的只读事务配置
-        for ( String methodName : DEFAULT_READ_ONLY_METHOD_RULE_TRANSACTION_ATTRIBUTES ) {
-            transactionAttributeSource.addTransactionalMethod( methodName , readOnly );
+        for (String methodName : DEFAULT_READ_ONLY_METHOD_RULE_TRANSACTION_ATTRIBUTES) {
+            transactionAttributeSource.addTransactionalMethod(methodName, readOnly);
         }
         // 默认的传播事务配置
-        for ( String methodName : DEFAULT_REQUIRED_METHOD_RULE_TRANSACTION_ATTRIBUTES ) {
-            transactionAttributeSource.addTransactionalMethod( methodName , required );
+        for (String methodName : DEFAULT_REQUIRED_METHOD_RULE_TRANSACTION_ATTRIBUTES) {
+            transactionAttributeSource.addTransactionalMethod(methodName, required);
         }
         // 定制的只读事务配置
-        for ( String methodName : customizeReadOnlyMethodRuleTransactionAttributes ) {
-            transactionAttributeSource.addTransactionalMethod( methodName , readOnly );
+        for (String methodName : customizeReadOnlyMethodRuleTransactionAttributes) {
+            transactionAttributeSource.addTransactionalMethod(methodName, readOnly);
         }
         // 定制的传播事务配置
-        for ( String methodName : customizeRequiredMethodRuleTransactionAttributes ) {
-            transactionAttributeSource.addTransactionalMethod( methodName , required );
+        for (String methodName : customizeRequiredMethodRuleTransactionAttributes) {
+            transactionAttributeSource.addTransactionalMethod(methodName, required);
         }
-        return new TransactionInterceptor( transactionManager , transactionAttributeSource );
+        return new TransactionInterceptor(transactionManager, transactionAttributeSource);
     }
 
     /**
@@ -140,19 +141,19 @@ public class TransactionalConfig {
      * {@link #customizeTransactionInterceptor(PlatformTransactionManager)}
      */
     @Bean
-    public BeanNameAutoProxyCreator customizeTransactionBeanNameAutoProxyCreator () {
+    public BeanNameAutoProxyCreator customizeTransactionBeanNameAutoProxyCreator() {
         BeanNameAutoProxyCreator beanNameAutoProxyCreator = new BeanNameAutoProxyCreator();
         // 设置定制的事务拦截器
-        beanNameAutoProxyCreator.setInterceptorNames( CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME );
+        beanNameAutoProxyCreator.setInterceptorNames(CUSTOMIZE_TRANSACTION_INTERCEPTOR_NAME);
         // 默认
-        for ( String defaultTransactionBeanNameSuffix : DEFAULT_TRANSACTION_BEAN_NAMES ) {
-            beanNameAutoProxyCreator.setBeanNames( defaultTransactionBeanNameSuffix );
+        for (String defaultTransactionBeanNameSuffix : DEFAULT_TRANSACTION_BEAN_NAMES) {
+            beanNameAutoProxyCreator.setBeanNames(defaultTransactionBeanNameSuffix);
         }
         // 定制
-        for ( String customizeTransactionBeanName : customizeTransactionBeanNames ) {
-            beanNameAutoProxyCreator.setBeanNames( customizeTransactionBeanName );
+        for (String customizeTransactionBeanName : customizeTransactionBeanNames) {
+            beanNameAutoProxyCreator.setBeanNames(customizeTransactionBeanName);
         }
-        beanNameAutoProxyCreator.setProxyTargetClass( true );
+        beanNameAutoProxyCreator.setProxyTargetClass(true);
         return beanNameAutoProxyCreator;
     }
 
@@ -160,11 +161,11 @@ public class TransactionalConfig {
      * 支持当前事务;如果不存在创建一个新的
      * {@link org.springframework.transaction.annotation.Propagation#REQUIRED}
      */
-    private RuleBasedTransactionAttribute requiredTransactionRule () {
+    private RuleBasedTransactionAttribute requiredTransactionRule() {
         RuleBasedTransactionAttribute required = new RuleBasedTransactionAttribute();
-        required.setRollbackRules( Collections.singletonList( new RollbackRuleAttribute( Exception.class ) ) );
-        required.setPropagationBehavior( TransactionDefinition.PROPAGATION_REQUIRED );
-        required.setTimeout( TransactionDefinition.TIMEOUT_DEFAULT );
+        required.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(Exception.class)));
+        required.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        required.setTimeout(TransactionDefinition.TIMEOUT_DEFAULT);
         return required;
     }
 
@@ -172,10 +173,10 @@ public class TransactionalConfig {
      * 只读事务
      * {@link org.springframework.transaction.annotation.Propagation#NOT_SUPPORTED}
      */
-    private RuleBasedTransactionAttribute readOnlyTransactionRule () {
+    private RuleBasedTransactionAttribute readOnlyTransactionRule() {
         RuleBasedTransactionAttribute readOnly = new RuleBasedTransactionAttribute();
-        readOnly.setReadOnly( true );
-        readOnly.setPropagationBehavior( TransactionDefinition.PROPAGATION_NOT_SUPPORTED );
+        readOnly.setReadOnly(true);
+        readOnly.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED);
         return readOnly;
     }
 }

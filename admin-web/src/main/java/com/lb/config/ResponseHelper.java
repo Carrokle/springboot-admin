@@ -34,7 +34,7 @@ public class ResponseHelper {
         return response;
     }
 
-    public static <T> ResponseModel<T> builtResponseModel(T result){
+    public static <T> ResponseModel<T> buildResponseModel(T result){
         ResponseModel response = new ResponseModel();
         response.setStatus(HttpStatus.OK.value());
         response.setCode(HttpStatus.OK.getReasonPhrase());

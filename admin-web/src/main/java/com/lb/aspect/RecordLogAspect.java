@@ -151,7 +151,7 @@ public class RecordLogAspect extends AbstractAspectManager {
             operationLog.setActionArgs(sb.deleteCharAt(sb.length()-1).toString());
         }
         logger.info("执行方法信息:"+JSONObject.toJSON(operationLog));
-        operationLogService.insert(operationLog);
+        operationLogService.save(operationLog);
     }
 
 

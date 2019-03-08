@@ -16,12 +16,12 @@ public class Constant {
     /**
      * 用户注册默认角色
      */
-    public static final int DEFAULT_REGISTER_ROLE = 5;
+    // public static final int DEFAULT_REGISTER_ROLE = 5;
 
     public static final int BUFFER_MULTIPLE = 10;
 
     //验证码过期时间
-    public static final Long PASS_TIME =  50000 * 60 *1000L;
+    public static final Long PASS_TIME =  30 * 60 *1000L;
 
     //根菜单节点
     public static final String ROOT_MENU = "0";
@@ -38,10 +38,23 @@ public class Constant {
 
     public static final String CURRENT_USER = "currentUser";
 
+    /**登录名称*/
+    public static final String LOGIN_NAME = "mobile";
+
+    public static final String PASSWORD = "password";
     //启用
     public static final int ENABLE = 1;
     //禁用
     public static final int DISABLE = 0;
+
+    /**
+     * 在字典表中注册用户时的角色的类型
+     */
+    public static final String DICT_DEFAULT_REGISTER_ROLE = "default_register_role";
+    /**
+     * 在字典表中存储用户默认密码的类型
+     */
+    public static final String DICT_DEFAULT_PASSWORD = "default_password";
 
     public static class FilePostFix{
         public static final String ZIP_FILE =".zip";

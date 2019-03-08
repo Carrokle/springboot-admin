@@ -1,9 +1,10 @@
 package com.lb.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lb.entity.UserThirdparty;
 import com.lb.mapper.UserThirdpartyMapper;
 import com.lb.service.IUserThirdpartyService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
 import org.springframework.stereotype.Service;
 
 /**

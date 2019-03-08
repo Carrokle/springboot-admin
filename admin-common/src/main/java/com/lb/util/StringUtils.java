@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author liugh
+ * @author
  * @since on 2018/5/8.
  */
 public class StringUtils {

@@ -19,5 +19,12 @@
     <sql id="Base_Column_List">
         menu_id AS menuId, parent_id AS parentId, menu_code AS menuCode, code, name, menu_type AS menuType, num, url, icon
     </sql>
+    <select id="getMenuByRoleCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select m.* from tb_menu m left join tb_role_to_menu r on m.menu_code=r.menu_code
+        where 1=1
+              <if test="roleCode != null and roleCode != ''">
+                  and  r.role_code=#{roleCode}
+              </if>
+    </select>
 
 </mapper>

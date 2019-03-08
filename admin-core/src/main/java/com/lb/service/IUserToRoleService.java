@@ -1,7 +1,8 @@
 package com.lb.service;
 
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.UserToRole;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -17,5 +18,5 @@ public interface IUserToRoleService extends IService<UserToRole> {
      * @param userNo
      * @return
      */
-    UserToRole selectByUserNo(String userNo);
+    UserToRole getByUserNo(String userNo);
 }

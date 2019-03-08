@@ -1,7 +1,7 @@
 package com.lb.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.Role;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>

@@ -1,9 +1,10 @@
 package com.lb.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lb.entity.Role;
 import com.lb.mapper.RoleMapper;
 import com.lb.service.IRoleService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
 import org.springframework.stereotype.Service;
 
 /**

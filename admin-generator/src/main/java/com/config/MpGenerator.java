@@ -71,9 +71,10 @@ public class MpGenerator {
         strategy.setTablePrefix(new String[] { "tb_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         // 需要生成的表
-         strategy.setInclude("tb_menu","tb_notice","tb_operation_log",
+        /* strategy.setInclude("tb_menu","tb_notice","tb_operation_log",
                  "tb_order","tb_role","tb_order_to_menu"
-                 ,"tb_sms_verify","tb_user","tb_user_thirdparty","tb_user_to_role");
+                 ,"tb_sms_verify","tb_user","tb_user_thirdparty","tb_user_to_role");*/
+        strategy.setInclude("tb_dictionary");
          // lombok模式
          strategy.setEntityLombokModel(true);
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表

@@ -2,7 +2,6 @@ package com.lb.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * Date: 2019-3-1
  * Description:
  */
-@Configuration
+
 @Slf4j
 public class DataJedisProperties {
     @Value("${spring.redis.host}")

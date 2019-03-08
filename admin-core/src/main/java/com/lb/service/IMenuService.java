@@ -1,6 +1,6 @@
 package com.lb.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.Menu;
 
 import java.util.List;
@@ -15,5 +15,13 @@ import java.util.List;
  */
 public interface IMenuService extends IService<Menu> {
 
-    List<Menu> selectMenuByRoleCode(String roleCode);
+    List<Menu> getMenuByRoleCode(String roleCode);
+
+    /**
+     * 获取菜单树形结构
+     * @param pId
+     * @param menus
+     * @return
+     */
+    List<Menu> treeMenuList(String pId, List<Menu> menus);
 }

@@ -28,7 +28,7 @@ import java.util.jar.JarFile;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author liugh
+ * @author
  * @Since 2018-05-10
  */
 @Component
@@ -40,7 +40,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 	@Value("${controller.scanPackage}")
 	private String scanPackage;
 
-	@Value("${server.context-path}")
+	@Value("${server.servlet.context-path}")
 	private String serverPath;
 
 	@Override
