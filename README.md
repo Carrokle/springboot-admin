@@ -1,2 +1,2 @@
 # springboot-admin
-springboot后台管理框架
+springboot+ant designe for vue后台管理框架
