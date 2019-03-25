@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {SpringbootApplication.class})
+@SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @Slf4j
 public class ApplicationTests {
