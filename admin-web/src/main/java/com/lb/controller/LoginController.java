@@ -8,10 +8,13 @@ import com.lb.config.ResponseHelper;
 import com.lb.config.ResponseModel;
 import com.lb.entity.User;
 import com.lb.service.IUserService;
+import com.lb.util.ComUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -74,4 +77,30 @@ public class LoginController {
         return ResponseHelper.buildResponseModel( userService.checkAndRegisterUser(requestJson));
     }
 
+    @ApiOperation(value = "忘记密码", notes = "body体参数，不需要Authorization", produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "requestJson", value = "{\"mobile\":\"17765071662\",\"captcha\":\"5780\",</br>" +
+                    "\"password\":\"123456\",\"rePassword\":\"123456\"}",required = true,
+                    dataType = "String", paramType = "body")
+    })
+    @PostMapping("/forget/password")
+    @Pass
+    public ResponseModel<User> resetPassword(@ValidationParam("mobile,captcha,password,rePassword")
+                                                     @RequestBody JSONObject requestJson) throws Exception {
+        return ResponseHelper.buildResponseModel(userService.updateForgetPassword(requestJson));
+    }
+
+    /**
+     * 检查用户是否注册过
+     * @param mobile
+     * @return
+     */
+    @ApiOperation(value = "检验用户是否注册过")
+    @ApiImplicitParam(name = "mobile" )
+    @GetMapping("/check/mobile")
+    @Pass
+    public ResponseModel checkRegister(@RequestParam("mobile") String mobile){
+        User user = userService.getByMobile(mobile);
+        return ResponseHelper.buildResponseModel(!ComUtil.isEmpty(user));
+    }
 }

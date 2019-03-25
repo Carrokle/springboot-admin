@@ -31,4 +31,14 @@ public class SmsVerifyServiceImpl extends ServiceImpl<SmsVerifyMapper, SmsVerify
 
         return this.list(lqw);
     }
+
+    @Override
+    public SmsVerify getLatestByMobileAndCaptchaAndType(String mobile, String captcha, int type) {
+        LambdaQueryWrapper<SmsVerify> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(SmsVerify::getMobile, mobile)
+                .eq(SmsVerify::getSmsVerify, captcha)
+                .eq(SmsVerify::getSmsType, type)
+        .orderByDesc(SmsVerify::getCreateTime);
+        return this.getOne(lqw);
+    }
 }

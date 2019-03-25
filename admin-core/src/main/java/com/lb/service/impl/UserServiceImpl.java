@@ -145,7 +145,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User checkAndRegisterUser(JSONObject requestJson) throws Exception {
-        return null;
+        User user = requestJson.toJavaObject(User.class);
+        if(!StringUtils.checkMobileNumber(user.getMobile())){
+            throw new BusinessException(PublicResultConstant.MOBILE_ERROR);
+        }
+        if(!user.getPassWord().equalsIgnoreCase(requestJson.getString("rePassword"))){
+            throw new BusinessException(PublicResultConstant.INVALID_RE_PASSWORD);
+        }
+        List<SmsVerify> smsVerifies = smsVerifyService.getByMobileAndCaptchaAndType(user.getMobile(),
+                requestJson.getString("captcha"),SmsSendUtil.SMSType.getType(SmsSendUtil.SMSType.REG.name()));
+        if(ComUtil.isEmpty(smsVerifies)){
+            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_ERROR);
+        }
+        // 验证码是否过期
+        if(SmsSendUtil.isCaptchaPassTime(smsVerifies.get(0).getCreateTime())){
+            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_PASS);
+        }
+        return this.register(user,dictionaryService.getDefaultRoleCode());
     }
 
     @Override
@@ -175,6 +191,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                     .build();
             userToRoleService.save(userToRole);
         }
+        return user;
+    }
+
+    @Override
+    public User updateForgetPassword(JSONObject requestJson)throws Exception {
+        String mobile = requestJson.getString("mobile");
+        if(!StringUtils.checkMobileNumber(mobile)){
+            throw new BusinessException(PublicResultConstant.MOBILE_ERROR);
+        }
+        if(!requestJson.getString("password").equals(requestJson.getString("rePassword"))){
+            throw new BusinessException(PublicResultConstant.INVALID_RE_PASSWORD);
+        }
+        User user = this.getByMobile(mobile);
+        SmsVerify smsVerify = smsVerifyService.getLatestByMobileAndCaptchaAndType(mobile,
+                requestJson.getString("captcha"),
+                SmsSendUtil.SMSType.getType(SmsSendUtil.SMSType.FINDPASSWORD.name()));
+        if(ComUtil.isEmpty(smsVerify)){
+            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_ERROR);
+        }
+        // 验证码是否过期
+        if(SmsSendUtil.isCaptchaPassTime(smsVerify.getCreateTime())){
+            throw new BusinessException(PublicResultConstant.VERIFY_PARAM_PASS);
+        }
+        user.setPassWord(BCrypt.hashpw(requestJson.getString("password"),BCrypt.gensalt()));
+        this.updateById(user);
         return user;
     }
 }

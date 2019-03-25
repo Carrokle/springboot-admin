@@ -23,4 +23,13 @@ public interface ISmsVerifyService extends IService<SmsVerify> {
      * @return
      */
     List<SmsVerify> getByMobileAndCaptchaAndType(String mobile, String captcha, int type);
+
+    /**
+     * 根据手机号、验证码、验证码类型获取最新的一条记录
+     * @param mobile 手机号
+     * @param captcha 验证码
+     * @param type 1：登录验证，2：注册验证，3：修改密码，4：修改账号
+     * @return
+     */
+    SmsVerify getLatestByMobileAndCaptchaAndType(String mobile, String captcha, int type);
 }

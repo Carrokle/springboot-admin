@@ -113,6 +113,10 @@ public class ComUtil {
         }
     }
 
+    public static boolean isNotEmpty(Object obj){
+        return !isEmpty(obj);
+    }
+
 
     public static boolean equals(String str1, String str2) {
         return str1 != null ? str1.equals(str2) : str2 == null;

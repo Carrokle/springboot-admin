@@ -29,4 +29,10 @@ public interface IDictionaryService extends IService<Dictionary> {
      */
     List<Dictionary> getByType(String type);
 
+    /**
+     * 获取默认注册用户的角色编号
+     * @return
+     */
+    String getDefaultRoleCode();
+
 }

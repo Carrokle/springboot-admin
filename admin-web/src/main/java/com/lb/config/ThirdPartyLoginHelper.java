@@ -47,7 +47,7 @@ public class ThirdPartyLoginHelper {
     }
 
     /** 获取微信用户信息 */
-    public static final ThirdPartyUser getWxUserinfo(String token, String openid) throws Exception {
+    public static final ThirdPartyUser getWxUserInfo(String token, String openid) throws Exception {
         ThirdPartyUser user = new ThirdPartyUser();
         String url = ResourcesConfig.THIRDPARTY.getString("getUserInfoURL_wx");
         url = url + "?access_token=" + token + "&openid=" + openid;
@@ -80,7 +80,7 @@ public class ThirdPartyLoginHelper {
      * @param uid
      * @return
      */
-    public static final ThirdPartyUser getSinaUserinfo(String token, String uid) throws Exception {
+    public static final ThirdPartyUser getSinaUserInfo(String token, String uid) throws Exception {
 
         String url = ResourcesConfig.THIRDPARTY.getString("getUserInfoURL_sina");
         url = url + "?access_token=" + token + "&uid=" + uid;
@@ -219,6 +219,12 @@ public class ThirdPartyLoginHelper {
         return map;
     }
 
+    /**
+     * 获取第三方登录授权地址
+     * @param host
+     * @param type 微博：sina 微信：wx QQ:qq
+     * @return
+     */
     public static String getRedirectUrl(String host , String type) {
         String url = "";
         url = ResourcesConfig.THIRDPARTY.getString("authorizeURL_" + type);

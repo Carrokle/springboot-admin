@@ -1,7 +1,9 @@
 package com.lb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lb.entity.User;
 import com.lb.entity.UserThirdparty;
+import com.lb.model.ThirdPartyUser;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.lb.entity.UserThirdparty;
  */
 public interface IUserThirdpartyService extends IService<UserThirdparty> {
 
+    User insertThirdPartyUser(ThirdPartyUser param, String password);
 }

@@ -40,6 +40,8 @@ public interface IUserService extends IService<User> {
 
     List<User> getByUser(User user);
 
+
+
     /**
      * 注册用户
      * @param user 用户信息
@@ -47,4 +49,6 @@ public interface IUserService extends IService<User> {
      * @return
      */
     User register(User user, String roleCode);
+
+    User updateForgetPassword(JSONObject requestJson)throws Exception;
 }
