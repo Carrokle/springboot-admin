@@ -5,14 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
+/**
+ * Date: 2019-3-25
+ * Description:
+ */
 @SpringBootApplication
 @MapperScan("com.lb.mapper")
 @EnableCaching
-// @ComponentScan(basePackages = {"com.lb.service","com.lb.controller"})
-public class SpringbootApplication {
-
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootApplication.class, args);
+        SpringApplication.run(Application.class,args);
     }
-
 }
