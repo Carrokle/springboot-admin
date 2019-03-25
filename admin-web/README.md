@@ -24,3 +24,6 @@ ENTRYPOINT：为了缩短 Tomcat 的启动时间，添加java.security.egd的系
  * 执行完成后用docker images可以看到生成了一个app的镜像
  * 创建容器 docker run -id -p 8080:8080 --name=admin-web app   （-d表示容器后台运行）
  * 启动成功后在浏览器访问地址即可
+
+mvn package  
+mvb package docker:build
