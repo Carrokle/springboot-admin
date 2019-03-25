@@ -130,7 +130,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.2.RELEASE</version>
                 <configuration>
-                    <mainClass>com.lb.SpringbootApplication</mainClass>
+                    <mainClass>com.lb.Application</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
