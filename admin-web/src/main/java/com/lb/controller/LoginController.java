@@ -10,6 +10,9 @@ import com.lb.entity.User;
 import com.lb.service.IUserService;
 import com.lb.util.ComUtil;
 
+import org.apache.commons.httpclient.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.Map;
 
 import io.swagger.annotations.Api;
@@ -34,6 +38,8 @@ public class LoginController {
     @Autowired
     private IUserService userService;
 
+    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @ApiOperation(value = "手机密码登录", notes = "body体参数，不需要Authorization")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "requestJson", value = "{\"mobile\":\"13888888888\",\"password\":\"123456\"}"
@@ -44,6 +50,7 @@ public class LoginController {
     @Pass
     public ResponseModel<Map<String,Object>> login(
         @ValidationParam("mobile,password") @RequestBody JSONObject requestJson ) throws Exception {
+        logger.info("调用登录接口=========>" + DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         return ResponseHelper.buildResponseModel(userService.checkMobileAndPassword(requestJson));
     }
 
