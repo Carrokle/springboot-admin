@@ -13,4 +13,10 @@ import com.lb.entity.Role;
  */
 public interface IRoleService extends IService<Role> {
 
+    /**
+     * 根据用户的编号查询角色
+     * @param userNo
+     * @return
+     */
+    Role getByUserNo(String userNo);
 }

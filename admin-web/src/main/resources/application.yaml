@@ -65,7 +65,7 @@ spring:
 ---
 # 生产环境
 server:
-  port: 8081
+  port: 8080
   tomcat:
     uri-encoding: utf-8
   servlet:

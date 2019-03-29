@@ -3,6 +3,8 @@ package com.lb.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Role;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * <p>
  * 角色表 Mapper 接口
@@ -13,4 +15,5 @@ import com.lb.entity.Role;
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
+    Role getByUserNo(@Param("userNo") String userNo);
 }

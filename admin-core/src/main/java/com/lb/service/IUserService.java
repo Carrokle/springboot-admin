@@ -25,6 +25,7 @@ public interface IUserService extends IService<User> {
      */
     Map<String,Object> checkMobileAndPassword(JSONObject requestJson) throws Exception;
 
+
     Map<String,Object> getLoginUserAndMenuInfo(User user);
 
     Map<String,Object> checkMobileAndCaptcha(JSONObject requestJson)throws Exception;

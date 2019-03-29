@@ -5,6 +5,7 @@ import com.lb.entity.Role;
 import com.lb.mapper.RoleMapper;
 import com.lb.service.IRoleService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
+    @Autowired
+    private RoleMapper roleMapper;
+
+    @Override
+    public Role getByUserNo(String userNo) {
+        return roleMapper.getByUserNo(userNo);
+    }
 }

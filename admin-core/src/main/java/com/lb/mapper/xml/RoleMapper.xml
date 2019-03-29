@@ -12,5 +12,8 @@
     <sql id="Base_Column_List">
         role_code AS roleCode, role_name AS roleName
     </sql>
+    <select id="getByUserNo" resultType="com.lb.entity.Role" parameterType="java.lang.String">
+        select t1.role_code,t1.role_name from tb_role t1, tb_user_to_role t2 where t1.role_code=t2.role_code and t2.user_no=#{userNo}
+    </select>
 
 </mapper>
