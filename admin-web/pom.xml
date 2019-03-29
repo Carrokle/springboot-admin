@@ -105,11 +105,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-       <!-- <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+
+        <!-- yaml解析包-->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
 
         <!-- 热部署  使用intellij idea ，对应快捷键 Ctrl+Shift+F9重新编译-->
         <!--<dependency>

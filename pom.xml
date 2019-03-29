@@ -52,6 +52,7 @@
         <lombok.version>1.18.6</lombok.version>
         <okhttp.version>3.4.1</okhttp.version>
         <log4j.version>1.2.17</log4j.version>
+        <snakeyaml.version>1.24</snakeyaml.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -260,7 +261,20 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!--导入配置文件处理器，配置文件进行绑定就会有提示-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
+            </dependency>
+            <!--yaml配置文件解析包-->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <repositories>
