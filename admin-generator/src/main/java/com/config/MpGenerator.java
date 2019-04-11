@@ -29,7 +29,7 @@ public class MpGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("F:\\");
+        gc.setOutputDir("F:\\generator");
         gc.setFileOverride(true);
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -61,20 +61,23 @@ public class MpGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/liugh?characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/springboot-antd?characterEncoding=utf8");
 
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "tb_"});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "sys_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         // 需要生成的表
         /* strategy.setInclude("tb_menu","tb_notice","tb_operation_log",
                  "tb_order","tb_role","tb_order_to_menu"
                  ,"tb_sms_verify","tb_user","tb_user_thirdparty","tb_user_to_role");*/
-        strategy.setInclude("tb_dictionary");
+        // strategy.setInclude("tb_dictionary");
+        strategy.setInclude("sys_config","sys_dept","sys_dict","sys_log"
+                ,"sys_menu","sys_role","sys_role_dept","sys_role_menu"
+                ,"sys_user","sys_user_role");
          // lombok模式
          strategy.setEntityLombokModel(true);
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表

@@ -3,10 +3,12 @@ package com.lb.shiro;
 import com.lb.base.Constant;
 import com.lb.entity.Menu;
 import com.lb.entity.User;
+import com.lb.entity.UserRole;
 import com.lb.entity.UserToRole;
 import com.lb.exception.UnauthorizedException;
 import com.lb.service.IMenuService;
 import com.lb.service.IRoleService;
+import com.lb.service.IUserRoleService;
 import com.lb.service.IUserService;
 import com.lb.service.IUserToRoleService;
 import com.lb.service.SpringContextBeanService;
@@ -26,6 +28,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,7 +39,7 @@ import java.util.stream.Collectors;
 public class MyRealm extends AuthorizingRealm {
 
     private IUserService userService;
-    private IUserToRoleService userToRoleService;
+    private IUserRoleService userRoleService;
     private IMenuService menuService;
     private IRoleService roleService;
 
@@ -56,8 +59,8 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        if(userToRoleService == null){
-            userToRoleService = SpringContextBeanService.getBean(IUserToRoleService.class);
+        if(userRoleService == null){
+            userRoleService = SpringContextBeanService.getBean(IUserRoleService.class);
         }
         if(menuService == null){
             menuService = SpringContextBeanService.getBean(IMenuService.class);
@@ -68,7 +71,7 @@ public class MyRealm extends AuthorizingRealm {
         }
         String userNo = JWTUtil.getUserNo(principals.toString());
         // 查询用户角色关系
-        UserToRole userToRole = userToRoleService.getByUserNo(userNo);
+        UserRole userRole = userRoleService.getByUserId(Integer.parseInt(Objects.requireNonNull(userNo)));
         // 根据角色编号查询菜单
         List<Menu> menuList = menuService.getMenuByRoleCode(userToRole.getRoleCode());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
