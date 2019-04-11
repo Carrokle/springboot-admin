@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lb.mapper.RoleMenuMapper">
+
+    <resultMap type="com.lb.entity.RoleMenu" id="RoleMenuMap">
+        <result property="id" column="id" jdbcType="LONG INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="LONG INTEGER"/>
+        <result property="menuId" column="menu_id" jdbcType="LONG INTEGER"/>
+    </resultMap>
+    
+      <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, role_id, menu_id        
+    </sql>
+
+</mapper>
