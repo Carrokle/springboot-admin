@@ -383,7 +383,6 @@ public class DateTimeUtil {
         }
         int formatStrLength = formatStr.length;
         int i = 0;
-
         for (i = 0; i < formatStrLength; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat(formatStr[i]);
             try {
