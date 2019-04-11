@@ -6,16 +6,23 @@ import com.lb.entity.Menu;
 import java.util.List;
 
 /**
- * 菜单管理(sys_menu)表服务接口
+ * <p>
+ * 菜单管理 服务类
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface IMenuService extends IService<Menu> {
+
+    List<Menu> getByRoleId(Long roleId);
+
     /**
-     * 根据角色ID获取菜单
-     * @param roleId
+     * 将菜单构造为树形结构
+     * @param pid
+     * @param menuList
      * @return
      */
-    List<Menu> getByRoleId(Integer roleId);
+    List<Menu> treeMenuList(Long pid, List<Menu> menuList);
+
 }

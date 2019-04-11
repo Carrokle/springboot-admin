@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.Dept;
 
 /**
- * 部门管理(sys_dept)表服务接口
+ * <p>
+ * 部门管理 服务类
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface IDeptService extends IService<Dept> {
 

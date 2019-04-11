@@ -2,17 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.RoleMapper">
 
-    <resultMap type="com.lb.entity.Role" id="RoleMap">
-        <result property="roleId" column="role_id" jdbcType="LONG INTEGER"/>
-        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
-        <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        <result property="deptId" column="dept_id" jdbcType="LONG INTEGER"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.Role">
+        <id column="role_id" property="roleId" />
+        <result column="role_name" property="roleName" />
+        <result column="remark" property="remark" />
+        <result column="dept_id" property="deptId" />
+        <result column="create_time" property="createTime" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        role_id, role_name, remark, dept_id, create_time        
+        role_id AS roleId, role_name AS roleName, remark, dept_id AS deptId, create_time AS createTime
     </sql>
+    <select id="getByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select r.role_id, role_name, remark, dept_id, create_time from sys_role r ,sys_user_role ur
+        where r.role_id = ur.role_id and ur.user_id=#{userId}
+    </select>
 
 </mapper>

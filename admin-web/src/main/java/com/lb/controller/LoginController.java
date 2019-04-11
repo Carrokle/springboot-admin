@@ -40,6 +40,19 @@ public class LoginController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    @ApiOperation(value = "用户名密码登录", notes = "body体参数，不需要Authorization")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "requestJson", value = "{\"username\":\"admin\",\"password\":\"123456\"}"
+                    , required = true, dataType = "String", paramType = "body")
+    })
+    @PostMapping("/loginByUsername")
+    @Log(action = "SignIn", modelName = "Login", description = "前台登录接口")
+    @Pass
+    public ResponseModel<User> loginByUsername(
+            @ValidationParam("username,password") @RequestBody JSONObject requestJson ) throws Exception {
+        return ResponseHelper.buildResponseModel(userService.checkUsernameAndPassword(requestJson));
+    }
+
     @ApiOperation(value = "手机密码登录", notes = "body体参数，不需要Authorization")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "requestJson", value = "{\"mobile\":\"13888888888\",\"password\":\"123456\"}"

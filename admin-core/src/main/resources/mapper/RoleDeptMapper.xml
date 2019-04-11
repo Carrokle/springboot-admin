@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.RoleDeptMapper">
 
-    <resultMap type="com.lb.entity.RoleDept" id="RoleDeptMap">
-        <result property="id" column="id" jdbcType="LONG INTEGER"/>
-        <result property="roleId" column="role_id" jdbcType="LONG INTEGER"/>
-        <result property="deptId" column="dept_id" jdbcType="LONG INTEGER"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.RoleDept">
+        <id column="id" property="id" />
+        <result column="role_id" property="roleId" />
+        <result column="dept_id" property="deptId" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_id, dept_id        
+        id, role_id AS roleId, dept_id AS deptId
     </sql>
 
 </mapper>

@@ -2,17 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.DeptMapper">
 
-    <resultMap type="com.lb.entity.Dept" id="DeptMap">
-        <result property="deptId" column="dept_id" jdbcType="LONG INTEGER"/>
-        <result property="parentId" column="parent_id" jdbcType="LONG INTEGER"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
-        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.Dept">
+        <id column="dept_id" property="deptId" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="order_num" property="orderNum" />
+        <result column="del_flag" property="delFlag" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        dept_id, parent_id, name, order_num, del_flag        
+        dept_id AS deptId, parent_id AS parentId, name, order_num AS orderNum, del_flag AS delFlag
     </sql>
 
 </mapper>

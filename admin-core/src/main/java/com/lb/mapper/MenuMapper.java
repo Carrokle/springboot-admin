@@ -1,14 +1,20 @@
 package com.lb.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Menu;
 
+import java.util.List;
+
 /**
- * 菜单管理(sys_menu)表数据库访问层
+ * <p>
+ * 菜单管理 Mapper 接口
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface MenuMapper extends BaseMapper<Menu> {
 
+    List<Menu> getByRoleId(Long roleId);
 }

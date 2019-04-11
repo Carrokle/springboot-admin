@@ -4,13 +4,11 @@ import com.lb.base.Constant;
 import com.lb.entity.Menu;
 import com.lb.entity.User;
 import com.lb.entity.UserRole;
-import com.lb.entity.UserToRole;
 import com.lb.exception.UnauthorizedException;
 import com.lb.service.IMenuService;
 import com.lb.service.IRoleService;
 import com.lb.service.IUserRoleService;
 import com.lb.service.IUserService;
-import com.lb.service.IUserToRoleService;
 import com.lb.service.SpringContextBeanService;
 import com.lb.util.ComUtil;
 import com.lb.util.JWTUtil;
@@ -26,11 +24,11 @@ import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Date: 2019-3-1
@@ -71,9 +69,9 @@ public class MyRealm extends AuthorizingRealm {
         }
         String userNo = JWTUtil.getUserNo(principals.toString());
         // 查询用户角色关系
-        UserRole userRole = userRoleService.getByUserId(Integer.parseInt(Objects.requireNonNull(userNo)));
+        UserRole userRole = userRoleService.getByUserId(Long.parseLong(Objects.requireNonNull(userNo)));
         // 根据角色编号查询菜单
-        List<Menu> menuList = menuService.getMenuByRoleCode(userToRole.getRoleCode());
+        List<Menu> menuList = menuService.getByRoleId(userRole.getRoleId());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
  /*
         Role role = roleService.selectOne(new EntityWrapper<Role>().eq("role_code", userToRole.getRoleCode()));
@@ -84,11 +82,13 @@ public class MyRealm extends AuthorizingRealm {
         */
 
         // 添加菜单级别权限
-        Set<String> pers = new HashSet<>();
+        final Set<String> pers = new HashSet<>();
         if(!ComUtil.isEmpty(menuList)){
-            pers = menuList.stream()
-                    .filter(menu -> StringUtils.isNotBlank(menu.getCode()))
-                    .map(Menu::getCode).collect(Collectors.toSet());
+            menuList.forEach(menu -> {
+                if(StringUtils.isNotBlank(menu.getPerms())){
+                    pers.addAll(Arrays.asList(menu.getPerms().split(",")));
+                }
+            });
         }
         simpleAuthorizationInfo.addStringPermissions(pers);
         return simpleAuthorizationInfo;
@@ -116,7 +116,7 @@ public class MyRealm extends AuthorizingRealm {
         if(user == null){
             throw new UnauthenticatedException("User didn't existed!");
         }
-        if(! JWTUtil.verify(token,userNo,user.getPassWord())){
+        if(! JWTUtil.verify(token,userNo,user.getPassword())){
             throw new UnauthorizedException("Username or password error");
         }
         return new SimpleAuthenticationInfo(token,token,this.getName());

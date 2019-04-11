@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Config;
 
 /**
- * 系统配置信息表(sys_config)表数据库访问层
+ * <p>
+ * 系统配置信息表 Mapper 接口
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface ConfigMapper extends BaseMapper<Config> {
 

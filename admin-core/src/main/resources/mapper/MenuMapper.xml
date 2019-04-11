@@ -2,20 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.MenuMapper">
 
-    <resultMap type="com.lb.entity.Menu" id="MenuMap">
-        <result property="menuId" column="menu_id" jdbcType="LONG INTEGER"/>
-        <result property="parentId" column="parent_id" jdbcType="LONG INTEGER"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="url" column="url" jdbcType="VARCHAR"/>
-        <result property="perms" column="perms" jdbcType="VARCHAR"/>
-        <result property="type" column="type" jdbcType="INTEGER"/>
-        <result property="icon" column="icon" jdbcType="VARCHAR"/>
-        <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.Menu">
+        <id column="menu_id" property="menuId" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+        <result column="perms" property="perms" />
+        <result column="type" property="type" />
+        <result column="icon" property="icon" />
+        <result column="order_num" property="orderNum" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        menu_id, parent_id, name, url, perms, type, icon, order_num        
+        menu_id AS menuId, parent_id AS parentId, name, url, perms, type, icon, order_num AS orderNum
     </sql>
+    <select id="getByRoleId" resultMap="BaseResultMap">
+        select menu.menu_id, parent_id, name, url, perms, type, icon, order_num
+        from sys_menu menu, sys_role_menu roleMenu where menu.menu_id=roleMenu.menu_id and roleMenu.role_id=#{roleId}
+    </select>
 
 </mapper>

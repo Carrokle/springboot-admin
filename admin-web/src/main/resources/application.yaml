@@ -4,6 +4,75 @@ spring:
 #  这是一些公共的配置
   banner:
     location: config/my.txt
+  redis:
+    database: 0
+    host: 106.13.121.50
+    port: 26379
+    password: 123456
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    timeout: 10000
+
+token-random-salt: lb@123
+controller:
+  scanPackage: com.lb.controller
+mybatis-plus:
+#  mapper-locations: classpath:/com/lb/mapper/xml/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
+  typeAliasesPackage: com.lb.entity
+
+logging:
+  config: classpath:config/logback-spring.xml
+  level:
+    root: info
+  path: logs/
+  file: springboot-admin.log
+---
+#开发环境
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /api/v1
+spring:
+  profiles: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springboot-antd?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
+
+---
+# 生产环境
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /api/v1
+spring:
+  profiles: prod
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -25,50 +94,3 @@ spring:
     filters: stat,wall,log4j
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     useGlobalDataSourceStat: true
-  redis:
-    database: 0
-    host: 106.13.121.50
-    port: 26379
-    password: 123456
-    jedis:
-      pool:
-        max-idle: 8
-        min-idle: 0
-        max-active: 8
-        max-wait: -1
-    timeout: 10000
-
-token-random-salt: lb@123
-controller:
-  scanPackage: com.lb.controller
-mybatis-plus:
-  mapper-locations: classpath:/com/lb/mapper/xml/*Mapper.xml
-  typeAliasesPackage: com.lb.entity
-
-logging:
-  config: classpath:config/logback-spring.xml
-  level:
-    root: info
-  path: logs/
-  file: springboot-admin.log
----
-#开发环境
-server:
-  port: 8080
-  tomcat:
-    uri-encoding: utf-8
-  servlet:
-    context-path: /api/v1
-spring:
-  profiles: dev
-
----
-# 生产环境
-server:
-  port: 8080
-  tomcat:
-    uri-encoding: utf-8
-  servlet:
-    context-path: /api/v1
-spring:
-  profiles: prod

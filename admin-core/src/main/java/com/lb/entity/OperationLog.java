@@ -1,8 +1,11 @@
 package com.lb.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -11,89 +14,86 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
- * 操作日志表(tb_operation_log)表实体类
+ * <p>
+ * 操作日志表
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:42:32
+ * @author null123
+ * @since 2019-04-11
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("tb_operation_log")
+@Accessors(chain = true)
+@TableName("sys_operation_log")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class OperationLog extends Model<OperationLog> {
+
+    private static final long serialVersionUID = 1L;
+
     /**
-     *主键
+     * 主键
      */
-    @TableId(value = "operation_log_id")
+    @TableId(value = "operation_log_id", type = IdType.AUTO)
     private Integer operationLogId;
     /**
-     *日志描述
+     * 日志描述
      */
-    @TableId(value = "log_description")
+    @TableField("log_description")
     private String logDescription;
     /**
-     *方法参数
+     * 方法参数
      */
-    @TableId(value = "action_args")
+    @TableField("action_args")
     private String actionArgs;
     /**
-     *用户主键
+     * 用户主键
      */
-    @TableId(value = "user_no")
+    @TableField("user_no")
     private String userNo;
     /**
-     *类名称
+     * 类名称
      */
-    @TableId(value = "class_name")
+    @TableField("class_name")
     private String className;
     /**
-     *方法名称
+     * 方法名称
      */
-    @TableId(value = "method_name")
+    @TableField("method_name")
     private String methodName;
-    @TableId(value = "ip")
     private String ip;
     /**
-     *创建时间
+     * 创建时间
      */
-    @TableId(value = "create_time")
+    @TableField("create_time")
     private Long createTime;
     /**
-     *模块名称
+     * 模块名称
      */
-    @TableId(value = "model_name")
+    @TableField("model_name")
     private String modelName;
     /**
-     *操作
+     * 操作
      */
-    @TableId(value = "action")
     private String action;
     /**
-     *是否成功 1:成功 2异常
+     * 是否成功 1:成功 2异常
      */
-    @TableId(value = "succeed")
     private Integer succeed;
     /**
-     *异常堆栈信息
+     * 异常堆栈信息
      */
-    @TableId(value = "message")
     private String message;
 
 
-
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
     @Override
     protected Serializable pkVal() {
         return this.operationLogId;
     }
-        
+
 }

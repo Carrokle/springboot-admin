@@ -152,3 +152,8 @@ INSERT INTO `sys_dept` (`dept_id`, `parent_id`, `name`, `order_num`, `del_flag`)
 INSERT INTO `sys_dict`(`id`, `name`, `type`, `code`, `value`, `order_num`, `remark`, `del_flag`) VALUES (1, '性别', 'sex', '0', '女', 0, NULL, 0);
 INSERT INTO `sys_dict`(`id`, `name`, `type`, `code`, `value`, `order_num`, `remark`, `del_flag`) VALUES (2, '性别', 'sex', '1', '男', 1, NULL, 0);
 INSERT INTO `sys_dict`(`id`, `name`, `type`, `code`, `value`, `order_num`, `remark`, `del_flag`) VALUES (3, '性别', 'sex', '2', '未知', 3, NULL, 0);
+
+
+insert into sys_role(role_id, role_name, remark, create_time) values (1,'admin','管理员',now());
+insert into sys_user_role(id, user_id, role_id) values (1,1,1);
+insert into sys_role_menu(role_id, menu_id) select role_id,menu_id from sys_role,sys_menu;

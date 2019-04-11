@@ -2,21 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.UserMapper">
 
-    <resultMap type="com.lb.entity.User" id="UserMap">
-        <result property="userId" column="user_id" jdbcType="LONG INTEGER"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="salt" column="salt" jdbcType="VARCHAR"/>
-        <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="INTEGER"/>
-        <result property="deptId" column="dept_id" jdbcType="LONG INTEGER"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.User">
+        <id column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="email" property="email" />
+        <result column="mobile" property="mobile" />
+        <result column="avatar" property="avatar" />
+        <result column="status" property="status" />
+        <result column="dept_id" property="deptId" />
+        <result column="create_time" property="createTime" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, username, password, salt, email, mobile, status, dept_id, create_time        
+        user_id AS userId, username, password, salt, email, mobile, avatar, status, dept_id AS deptId, create_time AS createTime
     </sql>
 
 </mapper>

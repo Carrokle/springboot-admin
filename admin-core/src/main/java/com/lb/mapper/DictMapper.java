@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Dict;
 
 /**
- * 数据字典表(sys_dict)表数据库访问层
+ * <p>
+ * 数据字典表 Mapper 接口
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface DictMapper extends BaseMapper<Dict> {
 

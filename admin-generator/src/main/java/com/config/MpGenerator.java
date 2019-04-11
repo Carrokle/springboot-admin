@@ -75,7 +75,7 @@ public class MpGenerator {
                  "tb_order","tb_role","tb_order_to_menu"
                  ,"tb_sms_verify","tb_user","tb_user_thirdparty","tb_user_to_role");*/
         // strategy.setInclude("tb_dictionary");
-        strategy.setInclude("sys_config","sys_dept","sys_dict","sys_log"
+        strategy.setInclude("sys_config","sys_dept","sys_dict","sys_operation_log"
                 ,"sys_menu","sys_role","sys_role_dept","sys_role_menu"
                 ,"sys_user","sys_user_role");
          // lombok模式

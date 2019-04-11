@@ -42,5 +42,13 @@ public class ResponseHelper {
         response.setResult(result);
         return response;
     }
+
+    public static ResponseModel buildResponseModel(HttpStatus httpStatus, String message){
+        ResponseModel response = new ResponseModel();
+        response.setStatus(httpStatus.value());
+        response.setCode(httpStatus.getReasonPhrase());
+        response.setMessage(message);
+        return response;
+    }
 }
 

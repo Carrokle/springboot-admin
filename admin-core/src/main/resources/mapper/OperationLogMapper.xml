@@ -2,24 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lb.mapper.OperationLogMapper">
 
-    <resultMap type="com.lb.entity.OperationLog" id="OperationLogMap">
-        <result property="operationLogId" column="operation_log_id" jdbcType="INTEGER"/>
-        <result property="logDescription" column="log_description" jdbcType="VARCHAR"/>
-        <result property="actionArgs" column="action_args" jdbcType="VARCHAR"/>
-        <result property="userNo" column="user_no" jdbcType="VARCHAR"/>
-        <result property="className" column="class_name" jdbcType="VARCHAR"/>
-        <result property="methodName" column="method_name" jdbcType="VARCHAR"/>
-        <result property="ip" column="ip" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="LONG INTEGER"/>
-        <result property="modelName" column="model_name" jdbcType="VARCHAR"/>
-        <result property="action" column="action" jdbcType="VARCHAR"/>
-        <result property="succeed" column="succeed" jdbcType="INTEGER"/>
-        <result property="message" column="message" jdbcType="VARCHAR"/>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lb.entity.OperationLog">
+        <id column="operation_log_id" property="operationLogId" />
+        <result column="log_description" property="logDescription" />
+        <result column="action_args" property="actionArgs" />
+        <result column="user_no" property="userNo" />
+        <result column="class_name" property="className" />
+        <result column="method_name" property="methodName" />
+        <result column="ip" property="ip" />
+        <result column="create_time" property="createTime" />
+        <result column="model_name" property="modelName" />
+        <result column="action" property="action" />
+        <result column="succeed" property="succeed" />
+        <result column="message" property="message" />
     </resultMap>
-    
-      <!-- 通用查询结果列 -->
+
+    <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        operation_log_id, log_description, action_args, user_no, class_name, method_name, ip, create_time, model_name, action, succeed, message        
+        operation_log_id AS operationLogId, log_description AS logDescription, action_args AS actionArgs, user_no AS userNo, class_name AS className, method_name AS methodName, ip, create_time AS createTime, model_name AS modelName, action, succeed, message
     </sql>
 
 </mapper>

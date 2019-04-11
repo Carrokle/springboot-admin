@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.UserRole;
 
 /**
- * 用户与角色对应关系(sys_user_role)表数据库访问层
+ * <p>
+ * 用户与角色对应关系 Mapper 接口
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
 

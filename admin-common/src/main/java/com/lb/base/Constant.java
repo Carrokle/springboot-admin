@@ -24,7 +24,7 @@ public class Constant {
     public static final Long PASS_TIME =  30 * 60 *1000L;
 
     //根菜单节点
-    public static final String ROOT_MENU = "0";
+    public static final Long ROOT_MENU = 0L;
 
     //菜单类型，1：菜单  2：按钮操作
     public static final int TYPE_MENU = 1;
@@ -55,6 +55,11 @@ public class Constant {
      * 在字典表中存储用户默认密码的类型
      */
     public static final String DICT_DEFAULT_PASSWORD = "default_password";
+
+    /**
+     * 超级管理员ID
+     */
+    public static final Long SUPER_ADMIN_ID = 1L;
 
     public static class FilePostFix{
         public static final String ZIP_FILE =".zip";

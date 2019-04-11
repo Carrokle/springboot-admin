@@ -39,4 +39,6 @@ public class PublicResultConstant {
     public static final String UPDATE_ROLEINFO_ERROR  = "更新角色信息失败";
 
     public static final String UPDATE_SYSADMIN_INFO_ERROR  = "不能修改管理员信息!";
+
+    public static final String USER_IS_NOT_ENABLE = "用户状态不可用";
 }

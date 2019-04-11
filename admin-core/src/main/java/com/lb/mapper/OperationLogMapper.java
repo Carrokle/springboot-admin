@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.OperationLog;
 
 /**
- * 操作日志表(tb_operation_log)表数据库访问层
+ * <p>
+ * 操作日志表 Mapper 接口
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:42:32
+ * @author null123
+ * @since 2019-04-11
  */
 public interface OperationLogMapper extends BaseMapper<OperationLog> {
 

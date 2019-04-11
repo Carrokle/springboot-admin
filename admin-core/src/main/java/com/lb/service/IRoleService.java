@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.Role;
 
 /**
- * 角色(sys_role)表服务接口
+ * <p>
+ * 角色 服务类
+ * </p>
  *
- * @author mybatis-generator
- * @since 2019-04-11 11:41:29
+ * @author null123
+ * @since 2019-04-11
  */
 public interface IRoleService extends IService<Role> {
-
+    Role getByUserId(Long userId);
 }
