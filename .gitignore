@@ -178,3 +178,4 @@ admin-web/target/generated-sources/
 admin-web/target/generated-test-sources/
 admin-web/target/maven-archiver/
 admin-web/target/maven-status/
+admin-web/target/classes/META-INF/
