@@ -69,9 +69,10 @@ public class MyRealm extends AuthorizingRealm {
         }
         String userNo = JWTUtil.getUserNo(principals.toString());
         // 查询用户角色关系
-        UserRole userRole = userRoleService.getByUserId(Long.parseLong(Objects.requireNonNull(userNo)));
+        List<UserRole> userRoleList = userRoleService.getByUserId(Long.parseLong(Objects.requireNonNull(userNo)));
         // 根据角色编号查询菜单
-        List<Menu> menuList = menuService.getByRoleId(userRole.getRoleId());
+        Long [] ids = userRoleList.stream().map(UserRole::getRoleId).distinct().toArray(Long[]::new);
+        Set<Menu> menuList = menuService.getByRoleIds(ids);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
  /*
         Role role = roleService.selectOne(new EntityWrapper<Role>().eq("role_code", userToRole.getRoleCode()));

@@ -8,6 +8,8 @@ import com.lb.service.IUserRoleService;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户与角色对应关系 服务实现类
@@ -20,9 +22,9 @@ import org.springframework.stereotype.Service;
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
 
     @Override
-    public UserRole getByUserId(Long userId) {
+    public List<UserRole> getByUserId(Long userId) {
         LambdaQueryWrapper<UserRole> lqw = new LambdaQueryWrapper<>();
         lqw.eq(UserRole::getUserId,userId);
-        return this.getOne(lqw,false);
+        return this.list(lqw);
     }
 }

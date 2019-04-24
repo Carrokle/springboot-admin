@@ -21,8 +21,10 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -62,11 +64,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(user.getStatus() != Constant.ENABLE){
             throw  new BusinessException(PublicResultConstant.USER_IS_NOT_ENABLE);
         }
-        Role role = roleService.getByUserId(user.getUserId());
-        user.setRoleName(role == null ? "" : role.getRoleName());
+        List<Role> roles = roleService.getByUserId(user.getUserId());
+        user.setRoleName(ComUtil.isNotEmpty(roles) ? roles.get(0).getRoleName() : "");
         String token = JWTUtil.sign(String.valueOf(user.getUserId()), user.getPassword());
         user.setToken(token);
         return user;
+    }
+
+    @Override
+    public String loginByUsername(JSONObject requestJson) throws BusinessException {
+        String username = requestJson.getString("username");
+        // 查询用户
+        User user = this.getByUsername(username);
+        if(ComUtil.isEmpty(user) || !BCrypt.checkpw(requestJson.getString("password"),user.getPassword())){
+            throw new BusinessException(PublicResultConstant.INVALID_USERNAME_PASSWORD);
+        }
+        if(user.getStatus() != Constant.ENABLE){
+            throw  new BusinessException(PublicResultConstant.USER_IS_NOT_ENABLE);
+        }
+        return JWTUtil.sign(String.valueOf(user.getUserId()),user.getPassword());
     }
 
     @Override
@@ -96,12 +112,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Map<String,Object> result = new HashedMap<>();
         result.put("user",user);
         // 查询角色信息
-        Role role = roleService.getByUserId(user.getUserId());
-        result.put("role",role);
-        List<Menu> menuList = Constant.SUPER_ADMIN_ID.equals(user.getUserId()) ? menuService.list() : menuService.getByRoleId(role.getRoleId());
+        List<Role> roles = roleService.getByUserId(user.getUserId());
+        Set<Menu> menuList = null;
+        if(Constant.SUPER_ADMIN_ID.equals(user.getUserId()+2)){
+            menuList = new HashSet<>(menuService.list());
+        }else{
+            Long[] ids = roles.stream().map(Role::getRoleId).distinct().toArray(Long[]::new);
+            menuList = menuService.getByRoleIds(ids);
+        }
+        // Set<String> permissions = menuService.getPermissions(menuList);
+        // 设置角色拥有的权限
+        // role.setPermissions(permissions);
         // 构造成属性结构
         List<Menu> resultMenuList = ComUtil.isEmpty(menuList) ? null : menuService.treeMenuList(Constant.ROOT_MENU, menuList);
         result.put("menu",resultMenuList);
+
+        result.put("roles",roles);
         return result;
     }
 }

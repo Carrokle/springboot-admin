@@ -151,25 +151,17 @@ gen
 
 # logs
 logs
-admin-common/src/main/java/com/common/
-admin-common/src/main/resources/
-admin-common/src/test/
 admin-common/target/generated-sources/
 admin-common/target/maven-archiver/
 admin-common/target/maven-status/
-admin-core/src/test/
 admin-core/target/classes/META-INF/
 admin-core/target/classes/mapper/
 admin-core/target/generated-sources/
-admin-generator/src/main/java/com/lv/
-admin-generator/src/main/resources/
-admin-generator/src/test/
 admin-generator/target/generated-sources/
 admin-generator/target/maven-archiver/
 admin-generator/target/maven-status/
 admin-web/.mvn/wrapper/MavenWrapperDownloader.java
 admin-web/.mvn/wrapper/maven-wrapper.properties
-admin-web/src/test/
 admin-web/target/admin-web.jar.original
 admin-web/target/classes/application.yaml
 admin-web/target/classes/config/

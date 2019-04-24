@@ -3,6 +3,8 @@ package com.lb.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lb.entity.UserRole;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户与角色对应关系 服务类
@@ -13,5 +15,5 @@ import com.lb.entity.UserRole;
  */
 public interface IUserRoleService extends IService<UserRole> {
 
-    UserRole getByUserId(Long userId);
+    List<UserRole> getByUserId(Long userId);
 }

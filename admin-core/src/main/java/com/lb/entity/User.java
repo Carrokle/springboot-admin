@@ -47,6 +47,11 @@ public class User extends Model<User> {
      * 密码
      */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickName;
     /**
      * 盐
      */

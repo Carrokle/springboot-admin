@@ -7,6 +7,8 @@
         <id column="menu_id" property="menuId" />
         <result column="parent_id" property="parentId" />
         <result column="name" property="name" />
+        <result column="title" property="title" />
+        <result column="component" property="component" />
         <result column="url" property="url" />
         <result column="perms" property="perms" />
         <result column="type" property="type" />
@@ -16,11 +18,19 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        menu_id AS menuId, parent_id AS parentId, name, url, perms, type, icon, order_num AS orderNum
+        menu_id AS menuId, parent_id AS parentId, name, title, component, url, perms, type, icon, order_num AS orderNum
     </sql>
     <select id="getByRoleId" resultMap="BaseResultMap">
-        select menu.menu_id, parent_id, name, url, perms, type, icon, order_num
+        select menu.menu_id, parent_id, name, title, component, url, perms, type, icon, order_num
         from sys_menu menu, sys_role_menu roleMenu where menu.menu_id=roleMenu.menu_id and roleMenu.role_id=#{roleId}
+    </select>
+
+    <select id="getByRoleIds" resultMap="BaseResultMap">
+        select menu.menu_id, parent_id, name, title, component, url, perms, type, icon, order_num
+        from sys_menu menu, sys_role_menu roleMenu where menu.menu_id=roleMenu.menu_id and roleMenu.role_id in
+        <foreach collection="ids" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
     </select>
 
 </mapper>

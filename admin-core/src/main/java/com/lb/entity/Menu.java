@@ -12,7 +12,6 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -25,9 +24,8 @@ import lombok.experimental.Accessors;
  * @author null123
  * @since 2019-04-11
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@Data
 @TableName("sys_menu")
 @Builder
 @NoArgsConstructor
@@ -47,7 +45,17 @@ public class Menu extends Model<Menu> {
     /**
      * 菜单名称
      */
+    @TableField("name")
     private String name;
+
+    @TableField("title")
+    private String title;
+
+    /**
+     * 组件名称
+     */
+    @TableField("component")
+    private String component;
     /**
      * 菜单URL
      */
@@ -71,7 +79,7 @@ public class Menu extends Model<Menu> {
     private Integer orderNum;
 
     @TableField(exist = false)
-    private List<Menu> childMenu;
+    private List<Menu> children;
 
 
     @Override
@@ -79,4 +87,20 @@ public class Menu extends Model<Menu> {
         return this.menuId;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(obj instanceof Menu){
+            Menu menu = (Menu) obj;
+            return this.getMenuId().equals(menu.getMenuId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.getMenuId().hashCode();
+    }
 }

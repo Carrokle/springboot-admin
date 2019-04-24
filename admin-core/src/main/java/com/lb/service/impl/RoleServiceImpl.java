@@ -8,6 +8,8 @@ import com.lb.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 角色 服务实现类
@@ -22,7 +24,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Autowired
     private RoleMapper roleMapper;
     @Override
-    public Role getByUserId(Long userId) {
+    public List<Role> getByUserId(Long userId) {
         return roleMapper.getByUserId(userId);
     }
 }

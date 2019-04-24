@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lb.annotation.Log;
 import com.lb.annotation.Pass;
 import com.lb.annotation.ValidationParam;
+import com.lb.base.Constant;
 import com.lb.config.ResponseHelper;
 import com.lb.config.ResponseModel;
 import com.lb.entity.User;
@@ -14,9 +15,11 @@ import org.apache.commons.httpclient.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,9 +51,9 @@ public class LoginController {
     @PostMapping("/loginByUsername")
     @Log(action = "SignIn", modelName = "Login", description = "前台登录接口")
     @Pass
-    public ResponseModel<User> loginByUsername(
+    public ResponseModel<String> loginByUsername(
             @ValidationParam("username,password") @RequestBody JSONObject requestJson ) throws Exception {
-        return ResponseHelper.buildResponseModel(userService.checkUsernameAndPassword(requestJson));
+        return ResponseHelper.buildResponseModel(userService.loginByUsername(requestJson));
     }
 
     @ApiOperation(value = "手机密码登录", notes = "body体参数，不需要Authorization")
@@ -123,4 +126,12 @@ public class LoginController {
         User user = userService.getByMobile(mobile);
         return ResponseHelper.buildResponseModel(!ComUtil.isEmpty(user));
     }
+
+
+    @PostMapping("/logout")
+    public ResponseModel logout(@RequestHeader(Constant.HTTP_REQUEST_AUTHORIZATION) String token){
+        return ResponseHelper.buildResponseModel(HttpStatus.OK,"退出成功");
+
+    }
+
 }

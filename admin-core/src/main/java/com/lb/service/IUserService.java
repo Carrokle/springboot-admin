@@ -23,6 +23,13 @@ public interface IUserService extends IService<User> {
 
     User checkUsernameAndPassword(JSONObject requestJson) throws BusinessException;
 
+    /**
+     * 登录接口，返回token
+     * @param jsonObject
+     * @return token
+     */
+    String loginByUsername(JSONObject requestJson) throws BusinessException;
+
     User  checkAndRegisterUser(JSONObject requestJson);
 
     User updateForgetPassword(JSONObject requestJson);

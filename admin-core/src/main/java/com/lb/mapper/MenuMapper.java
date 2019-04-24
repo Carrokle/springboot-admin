@@ -4,7 +4,10 @@ package com.lb.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Menu;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -17,4 +20,6 @@ import java.util.List;
 public interface MenuMapper extends BaseMapper<Menu> {
 
     List<Menu> getByRoleId(Long roleId);
+
+    Set<Menu> getByRoleIds(@Param("ids") Long [] ids);
 }

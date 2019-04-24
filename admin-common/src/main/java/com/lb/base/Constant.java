@@ -61,6 +61,8 @@ public class Constant {
      */
     public static final Long SUPER_ADMIN_ID = 1L;
 
+    public static final String HTTP_REQUEST_AUTHORIZATION = "Authorization";
+
     public static class FilePostFix{
         public static final String ZIP_FILE =".zip";
 

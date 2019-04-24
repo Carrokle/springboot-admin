@@ -7,6 +7,7 @@
         <id column="user_id" property="userId" />
         <result column="username" property="username" />
         <result column="password" property="password" />
+        <result column="nick_name" property="nickName" />
         <result column="salt" property="salt" />
         <result column="email" property="email" />
         <result column="mobile" property="mobile" />
@@ -18,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id AS userId, username, password, salt, email, mobile, avatar, status, dept_id AS deptId, create_time AS createTime
+        user_id AS userId, username, password,nick_name as nickName salt, email, mobile, avatar, status, dept_id AS deptId, create_time AS createTime
     </sql>
 
 </mapper>

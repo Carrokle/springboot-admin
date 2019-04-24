@@ -35,7 +35,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <spring-boot-starter-aop.version>1.5.1.RELEASE</spring-boot-starter-aop.version>
         <jsoup.version>1.8.1</jsoup.version>
-        <velocity.version>1.7</velocity.version>
+        <velocity.version>2.1</velocity.version>
         <shiro-spring.version>1.4.0</shiro-spring.version>
         <java-jwt.version>3.2.0</java-jwt.version>
         <dom4j.version>1.6.1</dom4j.version>
@@ -46,7 +46,6 @@
         <scala-bcrypt_2.10.version>2.3</scala-bcrypt_2.10.version>
         <rest-assured.version>2.9.0</rest-assured.version>
         <ant.version>1.9.7</ant.version>
-        <velocity.version>1.7</velocity.version>
         <springfox-swagger2.version>2.8.0</springfox-swagger2.version>
         <guava.version>18.0</guava.version>
         <lombok.version>1.18.6</lombok.version>
@@ -155,7 +154,8 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
+<!--                <artifactId>velocity</artifactId>-->
+                <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
             <dependency>

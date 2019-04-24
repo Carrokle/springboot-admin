@@ -7,10 +7,7 @@ import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.ArrayList;
@@ -20,6 +17,7 @@ import java.util.Map;
 
 /**
  * 代码生成器
+ *
  * @author liugh
  * @since 2018-03-21
  */
@@ -29,14 +27,19 @@ public class MpGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("F:\\generator");
+        // D:\IdeaProjects\springboot-admin\admin-generator\src\main\java
+        // F:\generator
+        gc.setOutputDir("D:\\IdeaProjects\\springboot-admin\\admin-generator\\src\\main\\java");
         gc.setFileOverride(true);
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
+        gc.setOpen(false); // 生成代码完后是否打开目录
+        gc.setBaseResultMap(true);
+        gc.setBaseColumnList(true);
         // .setKotlin(true) 是否生成 kotlin 代码
-        // gc.setAuthor("lb");
+        gc.setAuthor("mybatis-plus-generator");
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         // gc.setMapperName("%sDao");
@@ -48,8 +51,8 @@ public class MpGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.MYSQL);
-        dsc.setTypeConvert(new MySqlTypeConvert(){
+        /*dsc.setDbType(DbType.MYSQL);
+        dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
@@ -57,29 +60,39 @@ public class MpGenerator {
                 // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
                 return super.processTypeConvert(fieldType);
             }
-        });
+        });*/
+       /* dsc.setTypeConvert(new ITypeConvert() {
+            @Override
+            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+                return null;
+            }
+        });*/
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
         dsc.setUrl("jdbc:mysql://127.0.0.1:3306/springboot-antd?characterEncoding=utf8");
-
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "sys_"});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[]{"sys_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         // 需要生成的表
         /* strategy.setInclude("tb_menu","tb_notice","tb_operation_log",
                  "tb_order","tb_role","tb_order_to_menu"
                  ,"tb_sms_verify","tb_user","tb_user_thirdparty","tb_user_to_role");*/
         // strategy.setInclude("tb_dictionary");
-        strategy.setInclude("sys_config","sys_dept","sys_dict","sys_operation_log"
+      /*  strategy.setInclude("sys_config","sys_dept","sys_dict","sys_operation_log"
                 ,"sys_menu","sys_role","sys_role_dept","sys_role_menu"
-                ,"sys_user","sys_user_role");
-         // lombok模式
-         strategy.setEntityLombokModel(true);
+                ,"sys_user","sys_user_role");*/
+        strategy.setInclude("sys_menu");
+        // lombok模式
+        strategy.setEntityLombokModel(true);
+        // lombok Builder模式
+        strategy.setEntityBuilderModel(true);
+        // 设置字段注解
+        strategy.setEntityTableFieldAnnotationEnable(true);
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
 //         strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -98,7 +111,7 @@ public class MpGenerator {
         // strategy.setEntityColumnConstant(true);
         // 【实体】是否为构建者模型（默认 false）
         // public User setName(String name) {this.name = name; return this;}
-        strategy.setEntityBuilderModel(true);
+
         mpg.setStrategy(strategy);
 
         // 包配置

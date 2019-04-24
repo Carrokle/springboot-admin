@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,6 +61,12 @@ public class Role extends Model<Role> {
      */
     @TableField("create_time")
     private Date createTime;
+
+    /**
+     * 角色拥有的权限
+     */
+    @TableField(exist = false)
+    private Set<String> permissions = new HashSet<>();
 
 
     @Override

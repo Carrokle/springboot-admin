@@ -3,6 +3,8 @@ package com.lb.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lb.entity.Role;
 
+import java.util.List;
+
 /**
  * <p>
  * 角色 Mapper 接口
@@ -12,5 +14,5 @@ import com.lb.entity.Role;
  * @since 2019-04-11
  */
 public interface RoleMapper extends BaseMapper<Role> {
-    Role getByUserId(Long userId);
+    List<Role> getByUserId(Long userId);
 }
